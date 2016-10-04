@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load tags %}
+
+    {% url 'post:home' as home %}
+    {% url 'post:index' as post_index %}
+    {% url 'post:about' as about %}
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} Barış Aslan {% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'post/style.css' %}" />
+
+</head>
+<body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+            <!-- Logo -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'post:home' %}">Barış Aslan</a>
+            </div>
+
+            <!-- Items -->
+            <div class="collapse navbar-collapse" id="topNavbar">
+
+                <form class="navbar-form navbar-left" role="search" method="GET" action="">
+                    <div class="form-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search on website" value="{{ request.GET.q }}" >
+                        <input class="btn btn-default" type="submit" value="Ara">
+                    </div>
+                </form>
+
+                <ul class="nav navbar-nav navbar-right ">
+                    <li class="{% active request home %}" ><a href="{{ home }}">Anasayfa</a></li>
+                    <li class="dropdown ">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Yazılım
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu navbar-inverse myDropdownMenu">
+                            <li><a href="#">C++</a> </li>
+                            <li><a href="#">C#</a> </li>
+                            <li><a href="#">Java</a> </li>
+                            <li><a href="#">Python</a> </li>
+                        </ul>
+                    </li>
+
+                    <li class="{% active request post_index %}" ><a href="{{ post_index }}">Makaleler</a></li>
+                    <li class="{% active request about %}" ><a href="{{ about }}">Hakkımda</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar Finish -->
+
+
+    {% block body %}
+
+    {% endblock %}
+
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

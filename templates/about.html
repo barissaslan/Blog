@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} About | {{ block.super }} {% endblock %}
+{% load staticfiles %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="home-profile">
+                <img src="{% static 'post/images/profile.jpg' %}" alt="profile" class="img-responsive img-circle">
+            </div>
+
+            <div class="col-xs-8 col-sm-9 col-md-6 col-lg-6" id="home-header" >
+                <h1>Barış Aslan <small>Software Developer</small></h1>
+                <blockquote><em>Bilime ve teknolojiye meraklı, yazılımla yakından ilgilenen bir Bilgisayar Mühendisliği öğrencisi.</em> </blockquote>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

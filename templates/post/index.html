@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Posts | {{ block.super }}{% endblock %}
+
+{% block body %}
+
+    {% include 'messages/info.html' %}
+
+    <div class="container">
+        {% if user.is_authenticated %}
+            <div class="col-sm-offset-8">
+                <a href="{% url 'post:add' %}" class="btn btn-primary btn-sm">Add Post</a>
+            </div>
+        {% endif %}
+        <div class="col-sm-6 col-sm-offset-3">
+
+    {#        <h1>{{ value|my_add:2 }}</h1> //custom filter#}
+
+    {#        Now: {% current_time "%Y-%m-%d %H:%M:%S" %} //custom tag #}
+
+
+
+            {% include 'post/pagination.html' %}
+
+            <h1>Total Posts: {{ total }}</h1>
+
+
+            {% for post in posts %}
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="thumbnail">
+                                {% if post.image %}
+                                   <a href="{% url 'post:detail' post.slug %}"><img src="{{ post.image.url }}" class="img-responsive"></a>
+                                {% endif %}
+                                <div class="caption">
+                                    <h3>
+                                        <a href="{% url 'post:detail' post.slug %}">{{ post.title }}</a>
+                                        {% if post.draft %} <span style="color: #bf0000;"> | Draft</span> {% endif %}
+                                        {% if post.publish > today %}<span style="color: darkorchid"> | Future Post</span>{% endif %}
+                                        <small>{{ post.publish|timesince }} ago </small>
+                                    </h3>
+                                    {% if post.user.get_full_name %}
+                                        <p><span style="color: #2b669a">Author: <strong>{{ post.user.get_full_name }}</strong></span></p>
+                                    {% endif %}
+                                    {% if post.tags %}
+                                        <p>
+                                        <span style="color: #2b669a">Tags: </span>
+                                        {% for tag in post.tags.all %}
+                                           <strong><a href="{% url 'post:tagged' tag.slug %}">{{ tag }}</a></strong>
+                                        {% endfor %}
+                                        </p>
+                                    {% endif %}
+                                    <span style="color: #2b669a">Comments: <strong>{{ post.approved_comments.count }}
+                                        {% if user.is_authenticated %}
+                                            of {{ post.comments.count }}
+                                        {% endif %}</strong>
+                                    </span>
+                                    <hr>
+                                    <p>{{ post.content|safe|linebreaks|truncatewords:30 }}</p>
+                                    <p>
+                                        <a href="{% url 'post:detail' post.slug %}" class="btn btn-primary btn-sm" role="button">View</a>
+                                        {% if user.is_authenticated %}
+                                            <a href="{% url 'post:update' post.slug %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                                            <a href="{% url 'post:delete' post.slug %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            {% endfor %}
+
+            {% include 'post/pagination.html' %}
+
+        </div>
+    </div>
+{% endblock %}

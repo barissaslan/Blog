@@ -1,0 +1,17 @@
+
+<div class="pagination">
+    <span class="pager">
+        {% if posts.has_previous %}
+            <li><a href="?page={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Previous</a></li>
+        {% endif %}
+
+        <span style="color: #2b669a;">
+            <strong>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</strong>
+        </span>
+
+        {% if posts.has_next %}
+            <li><a href="?page={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a></li>
+        {% endif %}
+    </span>
+
+</div>

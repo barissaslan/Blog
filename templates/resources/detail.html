@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %} {% endblock %}
+{% load staticfiles %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <div class="container" style="text-align: right;" xmlns="http://www.w3.org/1999/html">
+            <div class="row">
+                <div class="btn-group" role="group" aria-label="...">
+                    <a href="{% url 'resources:add_topic' %}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span> Başlık Ekle
+                    </a>
+                    <a href="{% url 'resources:add_link' %}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span> Link Ekle
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="container-fluid">
+        <!-- Topic Header -->
+        <div class="row">
+            <!-- Logo -->
+            <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1" id="resoruces-avatar">
+                <img src="{{ topic.logo.url }}" alt="icon" class="img-responsive">
+            </div>
+
+            <!-- Title -->
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" id="resoruces-title" >
+                <h1>{{ topic.title }}</h1>
+            </div>
+
+            <!-- Buttons -->
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                {% if user.is_authenticated %}
+                <!-- Update -->
+                <form style="display: inline;">
+                    {%csrf_token %}
+                    <a href="{% url 'resources:upt_topic' topic.id %}" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span> Düzenle
+                    </a>
+                </form>
+
+                <!-- Delete -->
+                <form action="{% url 'resources:del_topic' topic.id %}" method="post" style="display: inline;">
+                    {%csrf_token %}
+                    <input type="hidden" name="resource_id" value="{{ topic.id }}">
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove"></span> Kaldır
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    {% for link in topic.link_set.all %}
+    <div class="container-fluid">
+        <blockquote>
+            <div class="row">
+                <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <h4><a href="{{ link.url }}">{{ link.title }}</a></h4>
+                    {% if user.is_authenticated %}
+                        <!-- Update -->
+                        <form style="display: inline;">
+                            {%csrf_token %}
+                            <a href="{% url 'resources:upt_link' link.id %}" class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span> Düzenle
+                            </a>
+                        </form>
+
+                        <!-- Delete -->
+                        <form action="{% url 'resources:del_link' link.id %}" method="post" style="display: inline;">
+                            {%csrf_token %}
+                            <input type="hidden" name="link_id" value="{{ link.id }}">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span> Kaldır
+                            </button>
+                        </form>
+                    {% endif %}
+
+                </div>
+            </div>
+            <p>Tür: {{ link.type }}</p>
+            <p>Dil: {{ link.language }}</p>
+            <p>{{ link.content }}</p>
+        </blockquote>
+    </div>
+{% endfor %}
+{% endblock %}

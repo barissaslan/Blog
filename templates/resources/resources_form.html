@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ header }} | {{ block.super }}{% endblock %}
+{% load bootstrap3 %}
+
+
+{% block body %}
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>{{ header }}</h1>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <input type="submit" class="btn btn-primary" value="Submit">
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}
