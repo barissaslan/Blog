@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from ckeditor.fields import RichTextField
 
 
 # class PostQuerySet(models.QuerySet):
@@ -27,7 +28,7 @@ def upload_location(instance, filename):
 class Post(models.Model):
     user = models.ForeignKey('auth.User', default=1)
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = RichTextField()
     image = models.FileField(upload_to=upload_location, null=True, blank=True)
     tags = TaggableManager()
     slug = models.SlugField(unique=True)

@@ -49,3 +49,4 @@ venv/*
 static_cdn/*
 *.pyc
 .idea/*
+media/*

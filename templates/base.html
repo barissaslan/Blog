@@ -10,7 +10,6 @@
 
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} Barış Aslan {% endblock %}</title>
-
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'post/style.css' %}" />
 
@@ -35,9 +34,11 @@
             <div class="collapse navbar-collapse" id="topNavbar">
 
                 <form class="navbar-form navbar-left" role="search" method="GET" action="">
-                    <div class="form-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search on website" value="{{ request.GET.q }}" >
-                        <input class="btn btn-default" type="submit" value="Ara">
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="q" placeholder="Search on website" value="{{ request.GET.q }}" >
+                        <span class="input-group-btn">
+                            <input class="btn btn-default" type="submit" value="Ara">
+                        </span>
                     </div>
                 </form>
 

@@ -15,7 +15,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
 # Application definition
@@ -30,6 +29,7 @@ INSTALLED_APPS = [
     # third party apps
     'taggit',
     'crispy_forms',
+    'ckeditor',
     # my apps
     'post',
 ]
@@ -118,3 +118,25 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# crispy
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# ckeditor
+CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, 'bootstrap/js/jquery.min.js')
+CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, 'ck_uploads')
+CKEDITOR_CONFIGS = {
+       'default': {
+           'toolbar': [
+                    ["Format", "Font"],
+                    ["Bold", "Italic", "Underline", "Strike", "RemoveFormat"],
+                    ['JustifyLeft', 'JustifyCenter', "JustifyRight", "JustifyBlock"],
+                    ["Image", "Link", "Unlink"],
+                    ['Undo', 'Redo'],
+                    # ["CodeSnippet"],
+           ],
+            # 'extraPlugins': 'codesnippet',
+            'width': '100%',
+       },
+   }
+

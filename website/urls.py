@@ -8,6 +8,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^', include('post.urls')),
+
+    # url(r'^tinymce/', include('tinymce.urls')),
+
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:
