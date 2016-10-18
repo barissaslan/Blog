@@ -27,7 +27,7 @@
                             <p>
                             <span style="color: #2b669a">Tags: </span>
                             {% for tag in post.tags.all %}
-                               <strong><a href="{% url 'post:tagged' tag.slug %}">{{ tag }}</a></strong>
+                               <strong><a href="{% url 'post:tagged' tag.slug %}">#{{ tag }}</a></strong>
                             {% endfor %}
                             </p>
                         {% endif %}
