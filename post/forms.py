@@ -27,6 +27,7 @@ class ContactForm(forms.Form):
 
 
 class CommentForm(forms.ModelForm):
+    text = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
         model = Comment

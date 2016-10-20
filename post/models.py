@@ -80,7 +80,7 @@ pre_save.connect(pre_save_post_receiver, sender=Post)
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments')
     name = models.CharField(max_length=200)
-    text = models.TextField()
+    text = RichTextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
 
