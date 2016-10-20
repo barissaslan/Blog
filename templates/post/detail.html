@@ -38,6 +38,13 @@
                         </span>
                         <hr>
                         <p>{{ post.content|safe|linebreaks }}</p>
+                        <p>
+                            <hr>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'post:update' post.slug %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                                <a href="{% url 'post:delete' post.slug %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                            {% endif %}
+                        </p>
 
                         <br><br><hr>
                         <h3>Comments:</h3>
