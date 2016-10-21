@@ -11,5 +11,5 @@ Simple and clean blog site with Django framework.
 
 ![alt tag](https://github.com/barissaslan/Blog/blob/master/screenshots/4.png)
 
-### Comment
+### Comment on Post
 ![alt tag](https://github.com/barissaslan/Blog/blob/master/screenshots/5.png)
