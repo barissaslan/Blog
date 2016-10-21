@@ -1,5 +1,5 @@
 # Blog
-Simple and clean blog site.
+Simple and clean blog site with Django framework.
 
 ## Screenshots
 
